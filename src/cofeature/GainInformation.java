@@ -28,6 +28,10 @@ public class GainInformation {
 
     private final List<Classe> classes;
 
+    public List<Classe> getClasses() {
+        return classes;
+    }
+
     public GainInformation(String caminhoBaseDados) {
         this.classes = new ArrayList<>();
         fileTreePrinter(new File(caminhoBaseDados), 0);
@@ -53,7 +57,7 @@ public class GainInformation {
         double probNaoTermoClasse = 0;
 
         for (Classe classe : classes) {
-            probClasse = (double) classe.getArquivos().size() / nrTotalArquivos;
+            probClasse = (double) classe.getArquivos().size() / feature.getArquivos().size();
             somatorio1 += probClasse * Math.log(probClasse);
             probTermoClasse = getProbabilidadeTermoClasse(feature, classe);
             probNaoTermoClasse = 1 - probTermoClasse;
@@ -62,6 +66,16 @@ public class GainInformation {
         }
 
         return -somatorio1 + probTermo * somatorio2 + probNaoTermo * somatorio3;
+    }
+
+    private double getQtdeArquivoClasse(Classe classe, Feature feature) {
+        double qtdeArquivoClasse = 0.0;
+        for (Arquivo arquivo : classe.getArquivos()) {
+            if (possuiTermo(arquivo, feature)) {
+                qtdeArquivoClasse++;
+            }
+        }
+        return qtdeArquivoClasse;
     }
 
     private void fileTreePrinter(File initialPath, int initialDepth) {

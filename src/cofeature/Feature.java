@@ -24,6 +24,7 @@ public class Feature {
     private String pathArquivoOrigem;
     private String nomeClasseOrigem;
     private String nomeArquivoOrigem;
+    private double dominancia;
 
     public Feature(String nome, double infoGain) {
         classes = new ArrayList<>();
@@ -116,6 +117,14 @@ public class Feature {
     public String toString() {
         return "\nFeature{" + "nome=" + nome + ", infoGain=" + infoGain + '}';
         //return nome + " ";
+    }
+
+    public double getDominancia() {
+        return dominancia;
+    }
+
+    public void setDominancia(double dominancia) {
+        this.dominancia = dominancia;
     }
 
 }

@@ -28,27 +28,42 @@ import java.util.logging.Logger;
 public class CoFeature {
 
     public static void main(String[] args) {
-        CoFeature coFeature = new CoFeature();
+        CoFeature cf = new CoFeature();
         String diretorio = System.getProperty("user.dir") + "/20newsbydatetest_Maid";
         GainInformation gi = new GainInformation(diretorio);
         List<String> textos = Util.getFilesPath(new File(diretorio), 0);
         List<Feature> features = new ArrayList<>();
+        System.out.println("Criando as Features");
+        //create the features
         for (String texto : textos) {
-            features.addAll(coFeature.getFeatures(texto, gi));
+            features.addAll(cf.getFeatures(texto, gi));
         }
         System.out.println(features.size());
 
+        System.out.println("Calculando o gain de informaaoo para cada feature");
+        //set the information gain to each features created
         for (Feature feature : features) {
             feature.setInfoGain(gi.getGanhoInformacao(feature));
         }
+        System.out.println("Ordenando as features pelo maior ganho de informacao");
         features.sort(new ComparadorFeature());
-
         System.out.println(features.toString());
-        coFeature.generateCoFeature(features);
+
+        System.out.println("Criando as cofeatures");
+        //create the cofeatures
+        List<Feature> coFeatures = cf.generateCoFeature(features);
+
+        System.out.println("Calculando a dominancia das cofeatures");
+        for (Feature coFeature1 : coFeatures) {
+            coFeature1.setDominancia(cf.calculaDominancia(coFeature1.getNome(), coFeature1.getNomeClasseOrigem(), coFeatures));
+        }
+        System.out.println("Ordenando as cofeatures pela maior dominancia");
+
+        System.out.println("Gerando o arquivo NGram.txt");
 
     }
 
-    private  List<Feature> getFeatures(String filePath, GainInformation gi) {
+    private List<Feature> getFeatures(String filePath, GainInformation gi) {
         List<Feature> features = new ArrayList<>();
         String pattern = "[a-zA-Z]+";
         String[] palavras;
@@ -77,7 +92,7 @@ public class CoFeature {
         return features;
     }
 
-    public  List<Feature> generateCoFeature(List<Feature> features) {
+    public List<Feature> generateCoFeature(List<Feature> features) {
         String diretorio = System.getProperty("user.dir") + "/20newsbydatetest_Maid";
         List<String> filePaths = Util.getFilesPath(new File(diretorio), 0);
         List<Feature> coFeatures = new ArrayList<>();
@@ -89,8 +104,8 @@ public class CoFeature {
                     featuresPorArquivo.add(feature);
                 }
             }
-            //coFeatures.addAll(combineUnigram(featuresPorArquivo));
-            combineUnigram(featuresPorArquivo, filePath);
+            coFeatures.addAll(combineUnigram(featuresPorArquivo, filePath));
+            //combineUnigram(featuresPorArquivo, filePath);
             //calculaDominancia();
         }
         // convert to set to remove duplicates
@@ -103,36 +118,43 @@ public class CoFeature {
         return coFeatures;
     }
 
-    private  void combineUnigram(List<Feature> features, String filePath) {
-        Map<String, Integer> cofeatures = new HashMap<>();
+    private Set<Feature> combineUnigram(List<Feature> features, String filePath) {
+        //Map<String, Integer> cofeatures = new HashMap<>();
+        //List<Feature> coFeatures = new ArrayList<>();
         String nomeClasse = features.get(0).getNomeClasseOrigem();
         String nomeArquivo = features.get(0).getNomeArquivoOrigem();
         System.out.print("20newsbydatetest_Maid/" + nomeClasse + "/" + nomeArquivo);
         StringBuilder sb = new StringBuilder();
+        Set<Feature> cofs = new HashSet<>();
         for (Feature feature : features) {
             for (Feature feature1 : features) {
                 if (feature.getNome().equals(feature1.getNome())) {
                     continue;
                 }
                 String cf = feature.getNome() + "_" + feature1.getNome();
-                if (cofeatures.containsKey(cf)) {
-                    int valorAtual = cofeatures.get(cf);
-                    valorAtual++;
-                    cofeatures.put(cf, valorAtual);
-                } else {
-                    cofeatures.put(cf, 1);
-                }
+                Feature f = new Feature(cf, nomeArquivo);
+                f.setNomeClasseOrigem(nomeClasse);
+                // coFeatures.add(f);
+                cofs.add(f);
+//                if (cofeatures.containsKey(cf)) {
+//                    int valorAtual = cofeatures.get(cf);
+//                    valorAtual++;
+//                    cofeatures.put(cf, valorAtual);
+//                } else {
+//                    cofeatures.put(cf, 1);
+//                }
             }
         }
-        Iterator it = cofeatures.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pairs = (Map.Entry) it.next();
-            sb.append("\n");
-            sb.append(pairs.getKey());
-            sb.append(":");
-            sb.append(pairs.getValue());
-            it.remove(); // avoids a ConcurrentModificationException
-        }
+
+//        Iterator it = cofeatures.entrySet().iterator();
+//        while (it.hasNext()) {
+//            Map.Entry pairs = (Map.Entry) it.next();
+//            sb.append("\n");
+//            sb.append(pairs.getKey());
+//            sb.append(":");
+//            sb.append(pairs.getValue());
+//            it.remove(); // avoids a ConcurrentModificationException
+//        }
         // sb.append("\n").append(feature.getNome()).append("_").append(feature1.getNome()).append(":1");
         //try {
         System.out.println(sb.toString());
@@ -141,5 +163,24 @@ public class CoFeature {
         //  Logger.getLogger(CoFeature.class.getName()).log(Level.SEVERE, null, ex);
         //}
 
+        return cofs;
     }
+
+    private double calculaDominancia(String featureProcurada, String classeProcurada, List<Feature> coFeatures) {
+        double nrDocClasse = 0.0;
+        double nrDocTotal = 0.0;
+
+        for (Feature coFeature : coFeatures) {
+            if (coFeature.getNome().equals(featureProcurada)) {
+                nrDocTotal++;
+                if (coFeature.getNomeClasseOrigem().equals(classeProcurada)) {
+                    nrDocClasse++;
+                }
+            }
+        }
+        double dominancia = nrDocClasse / nrDocTotal;
+        return dominancia;
+    }
+
+
 }
