@@ -1,0 +1,1 @@
+saccharomyces cerevisiae cdc, a structural gene for yeast dna ligase which complements schizosaccharomyces pombe cdc.. . nt size="+">
