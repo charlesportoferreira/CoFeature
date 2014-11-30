@@ -115,8 +115,7 @@ public class Feature {
 
     @Override
     public String toString() {
-        return "\nFeature{" + "nome=" + nome + ", infoGain=" + infoGain + '}';
-        //return nome + " ";
+        return "\nFeature{" + "nome=" + nome + ", infoGain=" + infoGain + ", dominancia=" + dominancia + '}';
     }
 
     public double getDominancia() {

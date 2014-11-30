@@ -46,7 +46,6 @@ public class GainInformation {
     }
 
     private double getGanhoInformacao(Feature feature, int nrTotalArquivos) {
-
         double somatorio1 = 0.0;
         double probClasse;
         double somatorio2 = 0.0;
@@ -57,7 +56,7 @@ public class GainInformation {
         double probNaoTermoClasse = 0;
 
         for (Classe classe : classes) {
-            probClasse = (double) classe.getArquivos().size() / feature.getArquivos().size();
+            probClasse = (double) classe.getArquivos().size() / nrTotalArquivos;
             somatorio1 += probClasse * Math.log(probClasse);
             probTermoClasse = getProbabilidadeTermoClasse(feature, classe);
             probNaoTermoClasse = 1 - probTermoClasse;

@@ -58,9 +58,10 @@ public class CoFeature {
             coFeature1.setDominancia(cf.calculaDominancia(coFeature1.getNome(), coFeature1.getNomeClasseOrigem(), coFeatures));
         }
         System.out.println("Ordenando as cofeatures pela maior dominancia");
-
+        coFeatures.sort(new ComparadorCofeature());
+        
         System.out.println("Gerando o arquivo NGram.txt");
-
+        System.out.println(coFeatures.toString());
     }
 
     private List<Feature> getFeatures(String filePath, GainInformation gi) {
