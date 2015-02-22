@@ -1,0 +1,1 @@
+from. avery@gestalt.stanford.edu (avery wang). subject. cd audio cd scsi commands. organization. dso, stanford university. lines. . . hi . does anyone out there know how i would get started on writing a. device driver for the apple cd cd rom drive, which *can*. read audio cd formats out through the scsi bus? . . thanks,. avery. .

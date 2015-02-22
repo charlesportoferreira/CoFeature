@@ -1,0 +1,1 @@
+from. maddox@bose.com (john maddox). subject. color tektronics term emulation. originator. maddox@oz. keywords. xterm tek . nntp posting host. oz. organization. bose corporation. lines. . . . does anyone know of an x based terminal emulator which can. emulate a color tektronics graphics terminal such as . tek or tek , etc?. .

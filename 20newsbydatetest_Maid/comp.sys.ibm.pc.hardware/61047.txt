@@ -1,0 +1,1 @@
+from. insj@mdw.cc.monash.edu.au (markfried fellensiek). subject. re. which high performance vlb video card?. organization. monash university. x newsreader. tin [version . pl]. lines. . . . . . the max vesa vl video controller/ cirus logic chipset. . (mb ram, bit color, x ni). . . does xfree. (or .) support this card?. . . markfried. (please post&email). .

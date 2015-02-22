@@ -1,0 +1,1 @@
+from. malik@alvserv .dfki.uni kl.de (thomas malik). subject. re. overriding default wm behaviour. organization. dfki kaiserslautern. lines. . distribution. world. nntp posting host. ws .dfki.uni kl.de. . specify ramdomplacement (or randomplace ? ). in your .tvtwmrc. this places the windows not interactively. in pseudo random positions on your screens..

@@ -1,0 +1,1 @@
+from. mkrajci@wilkes.wilkes.edu (martin k.). subject. tunnel diodes on i g spice. article i.d.. wilkes..aa. organization. utexas mail to news gateway. lines. . nntp posting host. cs.utexas.edu. . . does anybody have an idea how to model a tunnel diode on spice?. thank you.. . martin krajci mkrajci@wilkes.wilkes.edu.

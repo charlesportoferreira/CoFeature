@@ -110,7 +110,7 @@ public class Util {
     }
 
     public static void printFile(String fileName, String texto) throws IOException {
-        try (FileWriter fw = new FileWriter(fileName); BufferedWriter bw = new BufferedWriter(fw)) {
+        try (FileWriter fw = new FileWriter(fileName,true); BufferedWriter bw = new BufferedWriter(fw)) {
 
             bw.write(texto);
 

@@ -1,0 +1,10 @@
+----------------------------------------------------------------
+Thu Sep 19 13:08:03 CDT 2013:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872): instance a816c00e-0141-3768-473a-000006e20f60 
+on database directory memory:/home/steve/projects/hibernate/hibernate-orm/hibernate-orm-testing  with class loader sun.misc.Launcher$AppClassLoader@132c08c7 
+Loaded from file:/home/steve/.gradle/caches/artifacts-26/filestore/org.apache.derby/derby/10.9.1.0/jar/4538cf5564ab3c262eec65c55fdb13965625589c/derby-10.9.1.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.7.0_09-b05
+user.dir=/home/steve/projects/hibernate/hibernate-orm
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

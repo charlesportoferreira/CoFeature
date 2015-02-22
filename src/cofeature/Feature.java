@@ -5,42 +5,62 @@
  */
 package cofeature;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 
 /**
  *
  * @author charleshenriqueportoferreira
  */
-public class Feature {
+@Entity
+public class Feature implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
+    
     String nome;
+    
     double infoGain;
-    private final List<Classe> classes;
-    private final List<Arquivo> arquivos;
+    @Transient
+    private  List<Classe> classes;
+    @Transient
+    private int qtdeArquivos;
+    @Transient
     Map<String, Integer> arquivoClasse;
+    @Transient
     private String pathArquivoOrigem;
     private String nomeClasseOrigem;
     private String nomeArquivoOrigem;
     private double dominancia;
 
+    public Feature()    {
+
+    }
+
     public Feature(String nome, double infoGain) {
         classes = new ArrayList<>();
-        arquivos = new ArrayList<>();
+        // qtdeArquivos = new ArrayList<>();
         arquivoClasse = new HashMap<>();
         this.nome = nome;
         this.infoGain = infoGain;
     }
 
-    Feature(String nome, String arquivoOrigem) {
+    Feature(String nome, String pathArquivoOrigem) {
         classes = new ArrayList<>();
-        arquivos = new ArrayList<>();
+        //arquivos = new ArrayList<>();
         arquivoClasse = new HashMap<>();
         this.nome = nome;
-        this.pathArquivoOrigem = arquivoOrigem;
-        
+        this.pathArquivoOrigem = pathArquivoOrigem;
+
     }
 
     public String getNomeArquivoOrigem() {
@@ -50,7 +70,7 @@ public class Feature {
     public void setNomeArquivoOrigem(String nomeArquivoOrigem) {
         this.nomeArquivoOrigem = nomeArquivoOrigem;
     }
-    
+
     public String getNomeClasseOrigem() {
         return nomeClasseOrigem;
     }
@@ -58,7 +78,7 @@ public class Feature {
     public void setNomeClasseOrigem(String nomeClasseOrigem) {
         this.nomeClasseOrigem = nomeClasseOrigem;
     }
-    
+
     public String getPathArquivoOrigem() {
         return pathArquivoOrigem;
     }
@@ -93,12 +113,11 @@ public class Feature {
         this.infoGain = infoGain;
     }
 
-    public void addArquivo(Arquivo arquivo) {
-        if (!arquivos.contains(arquivo)) {
-            arquivos.add(arquivo);
-        }
-    }
-
+    // public void addArquivo(Arquivo qtdeArquivos) {
+    //   if (!qtdeArquivos.contains(qtdeArquivos)) {
+    //     qtdeArquivos.add(qtdeArquivos);
+    //}
+    // }
     public void addClasse(Classe classe) {
         if (!classes.contains(classe)) {
             classes.add(classe);
@@ -109,13 +128,12 @@ public class Feature {
         return classes;
     }
 
-    public List<Arquivo> getArquivos() {
-        return arquivos;
-    }
-
+    // public List<Arquivo> getArquivos() {
+    //   return qtdeArquivos;
+    //}
     @Override
     public String toString() {
-        return "\nFeature{" + "nome=" + nome + ", infoGain=" + infoGain + ", dominancia=" + dominancia + '}';
+        return nome + ":" + infoGain + ":" + nomeClasseOrigem + ":" + nomeArquivoOrigem;
     }
 
     public double getDominancia() {
@@ -124,6 +142,22 @@ public class Feature {
 
     public void setDominancia(double dominancia) {
         this.dominancia = dominancia;
+    }
+
+    public int getQtdeArquivos() {
+        return qtdeArquivos;
+    }
+
+    public void setQtdeArquivos(int qtdeArquivos) {
+        this.qtdeArquivos = qtdeArquivos;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }

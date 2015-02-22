@@ -1,0 +1,1 @@
+from. mkr@comtech.com (mark k. reha). subject. bit rgb. organization. comtech labs inc, palo alto. distribution. usa. lines. . . i am working with bit rgb bmp files and need to. comvert these to and bit images. how do convert. bit images to and bit rgb images? thanks! .

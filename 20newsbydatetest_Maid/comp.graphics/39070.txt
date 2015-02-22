@@ -1,0 +1,1 @@
+from. rwsv@uvacs.cs.virginia.edu (richard stoakley). subject. d modelers for unix. keywords. d, three d, modelers. organization. university of virginia computer science department. lines. . . could someone please post a list of good three d modelers that will. run on sparc stations; preferably cheap. thanks. . richard. rwsv@virginia.edu. . .

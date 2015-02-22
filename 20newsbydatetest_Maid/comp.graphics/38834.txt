@@ -1,0 +1,1 @@
+from. zlg@uxa.cso.uiuc.edu (zhenhai li ). subject. what is the difference between raytracing and rendering?. organization. university of illinois at urbana. lines. . . . hello, i've raytraced and rendered and the only difference i've found . is that raytracing takes a hell of a lot longer. am i missing. something?. . later,. z.. .
